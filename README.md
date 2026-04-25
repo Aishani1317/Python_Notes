@@ -1,7 +1,5 @@
 # Python_Notes
 
-Test
-
 Coding Resources: 
 
 - w3Schools: https://www.w3schools.com/python/python_lists_add.asp
@@ -13,6 +11,7 @@ Coding Resources:
 
 - Think Python (CS171 Textbook): https://allendowney.github.io/ThinkPython/chap01.html
 
+- Coding Bat: https://codingbat.com/prob/p149524
 
 Physics Python Resources
 
