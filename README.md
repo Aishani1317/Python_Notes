@@ -1,4 +1,4 @@
-# Python_Notes
+# Coding_Notes
 
 Python Coding Resources: 
 
