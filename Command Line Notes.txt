@@ -1,0 +1,91 @@
+Command Line/UNIX
+https://www.codecademy.com/article/command-line-commands
+
+
+Filesystem - organizes a computers files and directories into a tree structure
+ - 1st directories the root directory (parent file/directory)
+ - directory: a folder used to store files
+ - the purpose of an option is to modify the behavior of a command
+ - $ is a shell prompt, meaning its ready to accept a command
+
+
+Navigation Commands:
+- cd #Change directory
+- cd.. #changes directory by moving back one 
+- pwd #prints working/current directory
+- ls #list directory contents
+	- ls -a #lists all contents including hidden ones
+	- ls -t #lists contents in order of last modified
+	- ls -l #lists contents in long table format with additional information 
+
+
+
+File Handling #handle files and directories
+- rm file #remove a file/delete
+	- rm -r #removes directories
+- mkdir #make directory
+- touch # creates files
+
+
+Helper Commands
+- clear #clears command, can still cycle through old inputs/commands
+- tab # autocompletes names
+- up/down #cycle through old commands/inputs
+
+Environment Variables #config data uses by processes
+- HOME #$HOME 
+
+
+
+- cat #prints all text in a file
+- cp #copy file Ex. if there is a file called frida.txt, then cp frida.txt Frida.bak creates a new backup copy file called Frida.bak
+- mv #moves files without making a copy or even rename one
+- wc #word count
+
+Redirection - changing input output (I/O) redirection
+ - echo "Hello" #prints hello 
+	- echo "" > [].txt #moves quotes into file 
+ - > takes stdout on left and redirects to file, overwriting information 
+ - >> redirects and adds file without removing and overwriting
+ - < takes input from file and inputs it into the command on the left
+ - Ex. Cat < file.txt #this differs from cat file.txt because 2nd takes file as an argument and outputs file contents while the first a shell opens the file and send the contents as stdin without telling the cat a file's actual name
+ - | pipe #sends an input through a command 
+ - sort # orders the stdout in alphabetical order (doesn't actually change the file itself)
+ - uniq #filters out adjacent, duplicate lines within a file, if they are not adjacent, then use sort with it
+ - grep | #global regular expression print, is case sensitive, looks for patterns
+	- adding -i makes it no longer case sensitive
+	- adding -R makes it recursive, so that it looks in all files in a directory, outputting all filenames and lines in files with the matching results
+		- -Rl outputs only filenames, excluding lines
+- sed #stream editor, modifies input 
+	- 's/' substitutes so basically sed 's/oldword/newword/' filename.txt
+	- '/g' global, replaces everywhere 
+	- sed -i rewrites whole file
+
+- stdin #standard input/information input by user
+- stdout #stand output info output after a process
+- stderr #standard error/ error message for a failed process
+
+The Command Line Environment
+- alias #nicknames for commands
+- nano #text editor
+- . #the period indicates a hidden file
+- bash profile #a file where environment settings are stored
+	-when the bash profile is edited commands/settings auto run when a new terminal session is started
+- source [.bashprofile] #activates changes made in the bashprofile
+- history #history, printing history of commands entered in current session
+ 
+
+- Aliases #a setting, creates keyboard shortcuts
+	- Ex. Alias pd= 'pwd' #creates an. Alias "pd" for the pwd command, save in bash profile
+	- running source .bash_profile makes it available every time 
+	- alias ll="ls -la" ll is an alias for ls -la, printing ALL content in long format
+
+- Environment variables #variables used across commands/programs and have information 
+	- Environment - settings and preferences of current user
+	- USER #typically the computer owner
+	- export #makes variable available in all child sessions
+	- use $ when returning a variable's name (EX. $HOME)
+	- PS1 #environment variable export PS1=">> " sets commanpdrompt variable ($) to >> after sourced
+	- $HOME #is an environment variable that shows the path of the home directory
+	- PATH #is an enviro variable that stores a list of directories separated by a color
+	- env #environment, returns enviro variables including PATH, HOME, PWD, PS1, etc.

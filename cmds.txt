@@ -1,0 +1,271 @@
+#########################
+# LINUX COMMANDS - REFERENCE
+# Updated: $(date +%Y-%m-%d)							[4/24/2025]
+# By: 
+#########################
+
+
+
+# ——— GIT / VERSION CONTROL ———
+git init
+git status
+git add .
+git commit -m "message"
+git log
+git push origin main
+
+
+
+# ——— SEARCHING ———————————————————————
+find ~ -type f -name 'filename'           	# Recursively search for a file from home directory
+find /path/to/dir -type d -name '*coor*'  	# Search for directories with name pattern
+find . -name '*run_*'                           # Relative search
+grep 'pattern' filename                   	# Search inside a file
+grep -rnw '.' -e 'pattern'                	# Recursive search in current dir
+sudo find / -name 'target' 2>/dev/null          # Full system search (slow)
+
+
+
+# ——— SYSTEM MONITORING ——————————————
+pgrep -fl process_name                    # Show process and full command line
+lsof | grep path                          # Show open files linked to path
+top -u $USER
+ps -u $USER
+top                                             # Real-time system monitor
+htop                                            # Better top (if installed)
+ps aux | grep myscript                          # See if it's running
+kill -9 PID                                     # Kill with extreme prejudice
+
+
+# ——— ALIASES & BASH (SHELL) ————————————————
+alias aliasname='command'                # Temporary alias for session
+echo "alias a='cmd'" >> ~/.bash_aliases  # Persistent alias
+source ~/.bash_aliases                   # Load aliases immediately
+history | grep keyword                   # Search your shell command history
+which command                            # Show full path of a command
+
+
+
+
+
+
+
+# ——— SCRIPT EXECUTION & PERMISSION ————————————————
+chmod +x script.sh                       # Make script executable
+./script.sh                              # Run script in current dir
+bash script.sh                           # Run script explicitly with bash
+
+	# RUN FROM ANYWHERE
+	export PATH="$HOME/bin/my_scripts:$PATH"     		# Temporary PATH addition
+	echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc  	# Make it permanent
+	source ~/.bashrc
+
+
+
+# ——— SYMLINKS ————————————————
+ln -s /full/path/to/real_script.sh ~/bin/myscript  # Create symlink to run from anywhere
+	Double Check to see if it is: 		echo $PATH | tr ':' '\n' | grep "$HOME/bin"
+	If Not Fix: 				echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+						source ~/.bashrc
+
+
+
+
+
+# ——— SYSTEM & PROCESS MANAGEMENT ————
+htop                         # Interactive process viewer (better 'top')
+ps aux | grep <name>         # Check for process by name
+kill <PID>                   # Kill process by PID
+killall <process>            # Kill all instances of a process
+sudo systemctl status <svc>  # Check service status
+sudo systemctl stop <svc>    # Stop a service
+sudo shutdown now            # Shutdown immediately
+sudo reboot                  # Reboot
+
+
+
+# ——— NETWORK / VPN / MOUNTING ———————
+ifconfig                     						# Check IP addresses
+ping google.com              						# Test connection
+
+mount                       				 		# Show mounted devices
+mount | grep remote          						# Check if a drive is mounted
+fusermount -u <dir>          						# Unmount SSHFS mount
+
+lsof +D ~/Drexel_remote 
+	kill -9 <PID>
+		sshfs user@host:/remote/path /local/path   				# Mount remote FS
+
+pgrep -fl vpnagentd          						# Check if Cisco VPN is running
+sudo systemctl stop vpnagentd 						# Stop Cisco VPN daemon
+alias nukevpnmount='fusermount -u ~/Drexel_remote && pkill vpnagentd' 	# ✨ your kill switch
+
+
+
+# ——— FILE NAVIGATION & MANAGEMENT ———
+______________________________________
+ls -lh                       # Long format with human-readable sizes
+cd ~                         # Go to home directory
+cd -                         # Go to previous directory
+pwd                          # Show current directory
+cp file dest/                # Copy file to destination
+mv file dest/                # Move (or rename) file
+rm file                      # Delete file
+rm -r folder/                # Delete a directory and contents
+rm -rf ????????????? 			what is this too : find outputs -maxdepth 1 -type d -name "run_2025*" -exec rm -rf {} +
+
+	# Advanced
+	for f in coordinates0*; do mv "$f" "coordinates/coor${f#coordinates}"; done
+
+mkdir folder                 # Make a folder
+tree .                       # Show directory tree (needs `tree` package)
+du -sh *                     # Disk usage summary of each file/folder
+
+
+
+
+# ——— SCP ————————
+scp file.txt username@remote_host:/remote/directory/				# Local to remote
+scp username@remote_host:/remote/file.txt ./local_directory/			# Remote to local
+scp -r local_dir username@remote_host:/remote/path/				# For directories
+scp -P 2222 file.txt username@remote_host:/remote/directory/			# Specify a port (just in case)
+rsync -avz									# Alternative to scp 
+
+
+
+
+# ——— TEXT EDITING / VIEWING ————————
+nano <file>                  # Simple terminal text editor
+micro <file>                 # Better nano, with mouse and syntax highlighting
+vim <file>                   # Summon demons (advanced)
+less <file>                  # View a file page by page
+cat <file>                   # Dump entire file to terminal
+tail -f <file>               # Live monitor end of a file (logs, etc.)
+
+
+
+# ——— PYTHON / VIRTUAL ENVIRONMENTS ———
+python3 -m venv <envname>             # Create virtual environment
+source <envname>/bin/activate         # Activate it
+deactivate                             # Exit the virtual environment
+pip install <package>                 # Install package inside env
+alias extract_pdbs='python3 ~/Drexel_remote/DMD-CODE_BOX-INDX_STUDS/scripts/lipid_tools/PdbExtraction/ExtractTraj_4.py coor'
+
+
+
+# ——— RUNNING SCRIPTS / SIMULATIONS ———
+./bin/DMD_BOX-IND.linux inputs/input.conf  # Run DMD simulation manually
+alias dmd_auto='./bin/DMD_BOX-IND.linux inputs/input.conf'  # Auto run alias
+
+	# Shell Variable Syntax: 
+	VAR="hello"
+	echo "My var is $VAR"
+	FILENAME="run_$(date +%Y%m%d_%H%M%S).log"
+
+
+
+# ——— RUNNING LONG COMMANDS IN BACKGROUND ———————————
+nohup bash ~/bin/run_diag > ~/diagnostic_output.log 2>&1 &			# Run any script in the background, ignoring hangups (survives logouts)
+jobs										# Optional: View background job status
+tail -f ~/diagnostic_output.log							# Optional: Reconnect to output log
+
+# --- Using TMUX (recommended)
+tmux new -s dmd									# Start a tmux session named 'dmd'
+bash ~/bin/run_diag								# Inside tmux, run your script
+Ctrl + b, then press d								# Detach from tmux (script keeps running)
+tmux attach -t dmd								# Reattach to your tmux session later
+tmux ls										# List all tmux sessions
+tmux kill-session -t dmd							# Kill a tmux session when you're done
+
+# --- Make your script auto-backgrounded
+# Add this to the very end of run_dmd_diagnostic.sh:
+# (optional log redirection included)
+# nohup "$DMD" "$CONF" > logs/${RUN_NAME}_out.txt 2>&1 &
+
+
+
+# ——— BACKGROUND / APPLICATION MANAGEMENT ———
+nohup <cmd> > /dev/null 2>&1 &                      # Run command in background, suppress output
+alias charm='nohup pycharm > /dev/null 2>&1 &'      # Launch PyCharm detached
+jobs                                                # List background jobs
+fg %1                                               # Bring background job 1 to foreground
+disown -h %1                                        # Disconnect job from terminal
+
+# ——— ARCHIVING / CLEANUP ——————————————————
+tar -czvf archive.tar.gz folder/       # Create compressed archive
+tar -xzvf archive.tar.gz               # Extract archive
+zip -r archive.zip folder/             # Zip folder
+unzip archive.zip                      # Unzip
+
+
+# ——— DEBUGGING SCRIPTS (LOGS, ERRORS) ——————————————————
+script output.txt                               # Start recording terminal
+set -x                                           # Debug bash scripts (prints commands as run)
+tee file.log                                     # Output + log simultaneously
+
+
+
+# ——— Display Management  ——————————————————
+sudo systemctl restart display-manager
+gnome-tweaks
+
+
+
+
+
+
+
+
+
+# ——— VMD & MOLECULE STUFF ————————————————
+vmd coor0000.pdb                       # Load first frame in VMD
+# Then: File > Load Data Into Molecule > trajectory.dcd
+# Optional TCL render:
+# render TachyonInternal my_render.tga
+# To hide XYZ axes:
+axes location Off
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#########################
+# TIPS FOR TEXT EDITORS
+#########################
+
+# nano
+# - Ctrl+O to save
+# - Ctrl+X to exit
+# - Ctrl+K to cut a line, Ctrl+U to paste
+
+# micro
+# - Ctrl+S to save
+# - Ctrl+Q to quit
+# - Ctrl+E to open command prompt (for plugins etc.)
+# - Supports mouse, syntax highlighting, multi-line select
+
+# vim
+# - Type `i` to insert
+# - Esc + :wq to save & quit
+# - Esc + :q! to quit without saving
+# - Takes 1,000 years to master. Worth it?
+
+#########################
+# END OF COMMANDS
+#########################
+

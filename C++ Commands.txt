@@ -1,0 +1,127 @@
+C++
+
+Variable - A name that represents particular piece of computer memory that set aside to use/retrieve/store data
+
+Data Types:
+	Int - Integer Numbers (Ex. 0,420)
+	Double - Floating-Point Numbers (3.14, -200.0)
+	Char - characters ('a', '@')
+	String - Sequence of characters ("Hello Word", "Codecademy")
+	Bool - Truth variables (True, False)
+
+Std::out #character output stream, displays output
+Std::cin #read input from keyboard
+std::endl #insert a new line
+Return 0; #use to end a function, not required
+
+<< #operator for cout
+>> #operator for cin
+; #used at the end of a statement
+/n #creates a new line
+
+// #comment
+# - used as a pre-processor directive which means that the following file 
+	- a preprocessor prepares code
+	- iostream means input-output stream
+	- <> means standard library, look for the file in the standard system directories
+	- using #include <iostream>
+
+Function 
+- int main() {} #main code 
+
+Variables:
+- Before using a variable it must be declared(created), this is don't by providing a name, and a type (Ex. Bool, char, std::string, int, etc) in a file, say int year; which creates a variable called year
+- Assigning variables values: use = (Ex. Year = 2019;) this is initializing
+
+Arithmetic Operators
+- +,-,*,/,% (gives division remainder)
+pow(num, exponent);
+
+Conditionals and Logic - 
+- Relational Operators (Ex. ==, !=, <,>,<=,>=)
+- Logical Operators (Ex. && returns if both true like the and operator, || returns if at least one operand is true, ! Returns opposite boolean value)
+	- (!true) is false, (!False) is true, (!(10<11)) returns False
+- if (condition) { code} (Ex. If (flip==1){std::cost << "Heads\n"}
+- else //add to same line as if's closing bracket
+- else if (condition) {code}
+- switch //provides another syntax to write switch () {some code}
+- ++ means add 1, just like +=1
+Loop 
+- while loop 
+- for loop (Ex. for (int I = 0; I<20; I++) {} --> for (Initialize ; continuation condition; counter/increment) {})
+
+Errors
+- Compile-time errors //errors found by the compiler
+	- Syntax Errors //Errors when messing up C++ rules (Ex. Missing ;,),})
+	- Type Errors //Errors when types mismatched (Ex. Forgetting to declare variable, storing value in wrong type)
+- Link-time error //errors found by the linker when trying to combine object files to be executable
+- Run-time errors //Found by checks in running program (Happen after ./a.out)
+	- Division Error (Ex. Division by zero)
+	- Trying to open a file that doesn't exist
+	- Floating point exception
+- Logic Errors //Found by programmer looking for causes of incorrect results
+
+
+List //sequential container that stores elements in non-contiguous memory locations
+
+Data storage
+- Vector //sequence of elements that can be accessed through index
+	- std::vector<type> name; //lives in #include <vector} header, type is what sort of data type is stored in the vector, can include values/initialize the name with name ={stuff, stuff};
+	- can also set the size of the vector through name(num); where the num is the amount of elements that can be in the vector
+	- vectors first element index is 0 which means they are 0-indexed
+	- name.push_back(element); //adds a new element to the end/back of a vector
+	- name.pop_back(); /removes last element
+	- std::cost << name.size() returns the number of elements in a vector (
+- Index //elements position within an ordered list, is 0 
+- Arrays //store sequential elements, but can not change the size of arrays, can only modify existing elements
+	- type arrayname[size] //(Ex. Int favortieNum[4] creates an array that can hold 4 integers) the elements start off with the default type value(0 for int)
+
+
+Functions
+- headers give access to built in functions 
+- Making Functions there is a declaration(function name, return type, and parameters, which are input values/arguments) and Definition (body of the function, which is what it does)
+- returntype functionname(parameters, given) { //code; return output; }
+	- Function data types include double, int, bool, char, std::string, std::vector, void //void type, also known a subroutine, is a function with no return value, good for just printing stuff, 
+	- parameter must specify parameter type (Ex. Std::string, int, double)
+
+
+Variable scope 
+- global scope //these variables are accessible anywhere in the program
+- Local scope //these variables are defined in a function and are only accessible in that function
+
+Multi-file program
+- compile files to be able to access others (Ex. In order to access a file of functions in main, use g++ main.cpp my_functions.cpp)
+- header file, extension is .hpp or.h for the .cpp file //do this by #include "filename.hpp"
+- inline function //a function definition usually in header file, tells compiler insert function where the function calls
+
+Overloading //so that a function can have multiple definitions 
+- function templates allow to use data type as a parameter //created in header file
+
+
+Object orientated programming //a programming language that allows you to create anew data type
+- main three data types: strings, numbers, boolean
+-Classes //specification of the new datatype, what it looks like and made up of, multiple combineation of the basic data types for attributes
+	- a type created by the user (user-defined type)
+	- class classname {};
+	- everything in class is private and limited to access the objects within
+- functionality, create function for classes
+- Objects //an instance (Ex. Creating a student and each one is an instance of a class)
+	- to create/instantiate class objectname;
+
+Constructors //how objects of a class are made with no return type
+
+Object-Orientatd Programming (OOP)
+- Procedural //program moves linearly through instructions
+- Functional //program moves through functions
+- 4 Benefits to OOP:
+	-Encapsulation //bundle code together
+	- Abstraction //generalize object types and simplify program through classes
+	- Inheritance // reuse code since classes can inherit attributes from other classes
+	- Polymorphism //one class can make many objects
+
+References and Pointers
+- References //an alias for another object
+	- Ex. For a variable called soda, a reference for it could be pop, referred to with int &pop = soda; changing pop will change soda
+- Pointers //a variable that stores the memory address of another variable. Declared with `*`, it must point to a compatible data type.
+	- to create a pointer, type* pointername = &varaiblelookingfor 
+- std::cout &variable; prints the location of the variable as a hexadecimal

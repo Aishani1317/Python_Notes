@@ -1,0 +1,15 @@
+HTML - HyperTextMarkup Language
+
+Markup - markup languages a computer language which defines struture/presentation of raw text
+HTML elements - discrete components with tags 
+
+<h1>text</h1> #prints text
+    - <h1> is an opening tag
+    - text is the content
+    - </h1> is the closing tag
+    - <h1>text</h1> is an element
+        - <h#></h#> is the font size for headings
+
+elements
+    - <body>text</body> #content within this can be displayed, sort of like quotes in a print statement
+    - <div>text</div> #break in text

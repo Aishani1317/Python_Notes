@@ -1,0 +1,6 @@
+Root Notes
+- in order to run root, type Root (use .help to see a list of root commands)
+- to exit, type .q or .qqq
+
+variable definition
+- type name = value (Ex. int x = 5)

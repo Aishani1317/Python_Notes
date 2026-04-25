@@ -1,0 +1,27 @@
+GIT and GITHUB
+
+Git - software that helps us keep track of changes to a project, recording changes/store changes/reference changes
+GitHub - store Git repositories, backup files, share code, etc.
+
+- git init #this initializes a git project, making a git repository 
+
+
+Workflow
+- Working directory #where all the work of creating/editing/etc. happen
+- Staging area #where all changes are listed/files ready to commit
+- Repository #where permanent changes are stored
+	- Git init --> working directory --> git add --> staging area --> git commit --> Repository
+
+
+- Git status #check status of changes
+- git add filename #start tracking a file
+	- by git add filename1 filename2, they are both in the same commit
+	- git reset HEAD filename #remove file from stage
+- HEAD is the most recent commit, changes when reset
+- git diff #check updates in working directory that haven't been added to staging area
+
+- git log #view a list of commits chronologically
+- git show HEAD #outputs most recent commit made
+- git checkout HEAD filename #undos move recent commit, restoring filename to what it was before
+	- helpful to use git diff with it
+- git reset commitSHA #undos a previous(not the most recent) commit using SHA (get from git log) use first7 characters ofSHA
