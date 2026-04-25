@@ -1,0 +1,80 @@
+Python Notes -- 
+
+Resources: 
+
+- w3Schools: https://www.w3schools.com/python/python_lists_add.asp
+
+- GeeksforGeeks: https://www.geeksforgeeks.org/python/python-programming-language-tutorial/
+	- How to fix "ValueError: invalid literal for int() with base 10" in Python: https://www.geeksforgeeks.org/python/how-to-fix-valueerror-invalid-literal-for-int-with-base-10-in-python/
+	- Python List Slicing: https://www.geeksforgeeks.org/python/python-list-slicing/
+	- Keys with Maximum value - Python: https://www.geeksforgeeks.org/python/python-keys-with-maximum-value/
+
+- Think Python (CS171 Textbook): https://allendowney.github.io/ThinkPython/chap01.html
+
+2/14/26 - Exploring Data with Python Notes
+- Data Analysis Tool: Pandas, which is a library (matplotlib is another)
+- Interavtive data Analytics Platform: Jupyter Notebook
+
+import pandas as pd # import the pandas package
+
+df_repair = pd.read_csv('repair.csv') # import the lesson dataset
+
+df_repair.head() # display the the first five lines of the dataset
+
+What is a CSV File: Comma separated values, data tables in plain text
+
+df_repair.dtypes #prints datatypes for each columns, such as object, int64, float64
+
+
+Data Types
+
+int - numbers w/o decimals
+float - numbers w/ decimals
+str = text (use quotes)
+bool = True/False
+
+number = 4
+check_type = type(number)
+check_type #outputs int
+
+-----------------------
+Lists and Dictionaries
+
+Lists - uses [] #not all values have to have the same data type
+	- index starts at 0 #for item_list = ['first', 'apple', 6.0] index 0 = 'first'
+	- item_list[0] #outputs 'first'
+	- item_list.append(new_entry) #adds one new item
+	- item_list.insert(new_index, new_entry) #adds one new entry
+	- len(item_list) #outputs number of entries, would be 3 for initial list  
+
+Dictionaries - uses {}, set of key,value pairs to connect things together
+dictionary = {
+  key1:value1,
+  key2:value2,
+  key3:value3 }
+
+#for example
+tech_items = {
+	'laptops':4200
+	'phones': 6700
+	'desktop computers':4600}
+
+to access a key, use brackets #tech_items['phones'] outputs 6700
+	- can use to modofy dictionaries, reassign the phone key #tech_items['phones'] = 6400
+	- add new key-value pair if key isn't already in dictionary
+
+Methods - variabe tupes have tools called methods #examples include .append() and .head()
+- parameters of methods can be adjusted #Ex. dataFrame.head(n=10) prints 10 rows instead of 5
+	- argument is 10
+
+all methods follow: variable.method(keyword=argument)
+- category_counts.sort(reverse = True) #Prints the reverse sorted list, so largest to smallest
+
+Attributes- data associated with variables, store information #Ex .dtypes contains data types, no ()
+
+- can use .value_counts() on numerical columns
+- use .describe() for statistical info (count, mean, std, 25/50/75%, max) EX. repair['product_age'].describe()
+
+Physics Python Resources: 
+
+- Vpython/Glowscript  https://www.glowscript.org/docs/VPythonDocs/mathfunct.html
