@@ -1,0 +1,58 @@
+#Notes on CdFlib and commands
+
+imports:-----------------------------
+ import cdflib
+ from cdflib import cdfepoch - helps with times
+
+--------------------------------------------
+where file = 'filename.cdf'
+
+f = cdflib.CDF(file)
+with cdflib.CDF(file_path) as f:
+	print(f.cdf_info())      # general info
+---------------------------------------------
+To Get Top Level Groups:
+ top_Level = f.cdf_info()
+ print(top_Level.zVariables)
+----------------------------------------------
+A more organized way to get Top Level Groups(variables) is:
+
+for i in top_Level.zVariables: 
+        print("variable name:", i)
+
+#This prints values like: "variable name: tha_fgs_epoch"
+-------------------------------------------------
+To Get Object Types, which can be either global or variable attributes:
+
+for j in top_Level.Attributes:
+        print("attribute name:", j)
+
+#This prints attributes like: "attribute name: {'Project': 'Global'}" or "attribute name: {'UNITS': 'Variable'}"
+-----------------------------------------
+Variable Info is obtained through:
+
+print(f.varinq('tha_fgs_gsm'))      # variable info
+
+#prints: "VDRInfo(Variable='tha_fgs_gsm', Num=9, Var_Type='zVariable', Data_Type=44, Data_Type_Description='CDF_FLOAT', Num_Elements=1, Num_Dims=1, Dim_Sizes=[3], Sparse='No_sparse', Last_Rec=29393, Rec_Vary=True, Dim_Vary=[-1], Compress=6, Pad=array([-1.e+30], dtype=float32), Block_Factor=29394)"
+
+TO Get attribute information, use:
+
+print(f.varattsget('tha_fgs_time'))  #attributes
+
+#prints: {'CATDESC': 'tha_fgs, UTC, in seconds since 01-Jan-1970 00:00:00', 'FIELDNAM': 'tha_fgs_time', 'FILLVAL': -1e+30, 'FORMAT': 'F12.8', 'VALIDMIN': 0.0, 'VALIDMAX': 5000000000.0, 'VAR_TYPE': 'support_data', 'LABLAXIS': 'UT', 'UNITS': 'sec', 'VAR_NOTES': 'Unleaped seconds'}
+
+
+------------------------------------
+To actually retrive and assign Data:
+
+B = f.varget('tha_fgs_gsm') #This assigns the mag field data to B, the mag field is a 3D array
+
+print(type(B))      # should be numpy array
+print(B.shape)     # (N, 3) where N = 29394
+print(B[:5])       # first 5 rows 
+    
+Bx = B[:, 0] # x component of the magnetic field
+By = B[:, 1] # y component of the magnetic field
+Bz = B[:, 2]
+
+#used same procedure to get 3 comps. of position: pos = f.varget('tha_pos_gsm')
